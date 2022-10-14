@@ -3,7 +3,7 @@ package main;
 import entity.Entity;
 
 public class CollisionChecker {
-    GamePanel gp;
+    private final GamePanel gp;
     public CollisionChecker(GamePanel gp){
         this.gp = gp;
     }

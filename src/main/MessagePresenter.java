@@ -9,12 +9,12 @@ import object.ObjKey;
 import object.ObjPhotons;
 
 public class MessagePresenter {
-    GamePanel gp;
-    Font arial_40, arial_80B;
-    BufferedImage photonsImage;
-    public boolean gameFinished = false;
-    double playTime;
-    DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+    private final GamePanel gp;
+    private final Font arial_40, arial_80B;
+    private final BufferedImage photonsImage;
+    public boolean gameFinished = false;  // encapsulate!!
+    private double playTime;
+    private final DecimalFormat decimalFormat = new DecimalFormat("#0.00");
 
     public MessagePresenter(GamePanel gp) {
         this.gp = gp;

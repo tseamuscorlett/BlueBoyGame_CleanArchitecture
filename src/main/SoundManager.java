@@ -7,8 +7,8 @@ import javax.sound.sampled.Clip;
 import java.net.URL;
 
 public class SoundManager {
-    Clip clip;
-    URL[] soundURL = new URL[30];
+    private Clip clip;
+    private final URL[] soundURL = new URL[30];
 
     public SoundManager() {
         soundURL[0] = getClass().getResource("/music/Screen_Saver.wav");

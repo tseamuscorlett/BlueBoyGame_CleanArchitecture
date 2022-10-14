@@ -5,7 +5,7 @@ import object.ObjKey;
 import object.ObjPotion;
 
 public class AssetSetter {
-    GamePanel gp;
+    private final GamePanel gp;
     public AssetSetter(GamePanel gp) {
         this.gp = gp;
     }

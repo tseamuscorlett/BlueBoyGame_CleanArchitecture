@@ -10,28 +10,28 @@ import java.awt.*;
 public class GamePanel extends JPanel implements Runnable {
 
     // SCREEN SETTINGS　#1
-    final int originalTileSize = 16;
-    final int scale = 3;
+    private final int originalTileSize = 16;  // private for enclosure
+    private final int scale = 3;  // private for enclosure
     public final int tileSize = originalTileSize * scale;  // public for Player to access #3
     public final int maxScreenCol = 16;  // public for TileManager to access #4
     public final int maxScreenRow = 12;  // public #4
     public final int screenWidth = tileSize * maxScreenCol;  // public #4
     public final int screenHeight = tileSize * maxScreenRow;  // public #4
 
-    int FPS = 60;
+    private final int FPS = 60;  // private for enclosure
 
     // initialize game components
     TileManager tileM = new TileManager(this);  // #4
-    KeyHandler keyH = new KeyHandler();
-    SoundManager music = new SoundManager();  // #9,10
-    SoundManager se = new SoundManager();  // #9/10
+    private final KeyHandler keyH = new KeyHandler();
+    private final SoundManager music = new SoundManager();  // #9,10
+    private final SoundManager se = new SoundManager();  // #9/10
     public CollisionChecker collisionChecker = new CollisionChecker(this);  // #6
-    public AssetSetter assetSetter = new AssetSetter(this);  // for setting objects #7
+    private final AssetSetter assetSetter = new AssetSetter(this);  // for setting objects #7
     public MessagePresenter messagePresenter = new MessagePresenter(this);  // for on-screen messages #10
     Thread gameThread;  // for looping #2
 
     // ENTITY & OBJECT
-    Player player = new Player(this, keyH);
+    private final Player player = new Player(this, keyH);
     public SuperObject[] obj = new SuperObject[10];  // #7
 
     // Constructor with java.awt methods to set up screen
