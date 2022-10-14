@@ -34,19 +34,20 @@ public class GamePanel extends JPanel implements Runnable {
     Player player = new Player(this, keyH);
     public SuperObject[] obj = new SuperObject[10];  // #7
 
+    // Constructor with java.awt methods to set up screen
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);  // improve game speed
-        this.addKeyListener(keyH); // to recognize key input
+        this.addKeyListener(keyH); // to recognize key input "addKeyListener" is part of java.awt package
         this.setFocusable(true); // to receive key input
     }
 
+    // to be called by Main
     public void setupGame () {
         assetSetter.setObject();
         playMusic(0);  // background music #9
     }
-
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
