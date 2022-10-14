@@ -23,8 +23,8 @@ public class GamePanel extends JPanel implements Runnable {
     // initialize game components
     TileManager tileM = new TileManager(this);  // #4
     KeyHandler keyH = new KeyHandler();
-    Sound music = new Sound();  // #9,10
-    Sound se = new Sound();  // #9/10
+    SoundManager music = new SoundManager();  // #9,10
+    SoundManager se = new SoundManager();  // #9/10
     public CollisionChecker collisionChecker = new CollisionChecker(this);  // #6
     public AssetSetter assetSetter = new AssetSetter(this);  // for setting objects #7
     public MessagePresenter messagePresenter = new MessagePresenter(this);  // for on-screen messages #10
@@ -32,7 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     // ENTITY & OBJECT
     Player player = new Player(this, keyH);
-    public SuperObject obj[] = new SuperObject[10];  // #7
+    public SuperObject[] obj = new SuperObject[10];  // #7
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));

@@ -6,11 +6,11 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.net.URL;
 
-public class Sound {
+public class SoundManager {
     Clip clip;
-    URL soundURL[] = new URL[30];
+    URL[] soundURL = new URL[30];
 
-    public Sound() {
+    public SoundManager() {
         soundURL[0] = getClass().getResource("/music/Screen_Saver.wav");
         soundURL[1] = getClass().getResource("/music/pickup_1.wav");
     }
