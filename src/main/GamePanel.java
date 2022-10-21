@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable {
     private final SoundManager se = new SoundManager();  // #9/10
     public CollisionChecker collisionChecker = new CollisionChecker(this);  // #6
     private final AssetSetter assetSetter = new AssetSetter(this);  // for setting objects #7
-    public MessagePresenter messagePresenter = new MessagePresenter(this);  // for on-screen messages #10
+    public MessageManager messagePresenter = new MessageManager(this);  // for on-screen messages #10
     Thread gameThread;  // for looping #2
 
     // ENTITY & OBJECT
@@ -78,14 +78,15 @@ public class GamePanel extends JPanel implements Runnable {
         player.update();
     }
 
+    // this is for Presenter??
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         tileM.draw(g2);  // draw tiles before player! #4
         // go through obj[] Array #7
-        for(int i = 0; i < obj.length; i++) {
-            if(obj[i] != null) {
-                obj[i].draw(g2,this);
+        for (SuperObject superObject : obj) {
+            if (superObject != null) {
+                superObject.draw(g2, this);
             }
         }
         player.draw(g2);

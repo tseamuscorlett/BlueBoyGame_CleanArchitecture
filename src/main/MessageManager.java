@@ -5,10 +5,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 
-import object.ObjKey;
 import object.ObjPhotons;
 
-public class MessagePresenter {
+    public class MessageManager implements Drawable {
     private final GamePanel gp;
     private final Font arial_40, arial_80B;
     private final BufferedImage photonsImage;
@@ -16,7 +15,7 @@ public class MessagePresenter {
     private double playTime;
     private final DecimalFormat decimalFormat = new DecimalFormat("#0.00");
 
-    public MessagePresenter(GamePanel gp) {
+    public MessageManager(GamePanel gp) {
         this.gp = gp;
         arial_40 = new Font("Arial", Font.PLAIN, 40);
         arial_80B = new Font("Arial", Font.BOLD, 80);
@@ -25,6 +24,7 @@ public class MessagePresenter {
         photonsImage = photons.image;
     }
 
+    @Override
     public void draw(Graphics2D g2) {
         if (gameFinished) {
             // end screen
@@ -64,5 +64,4 @@ public class MessagePresenter {
             g2.drawString("Time: " + decimalFormat.format(playTime), gp.tileSize*11, 40);
         }
     }
-
 }

@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class SuperObject {  // encapsulate!!
+
     public BufferedImage image;
     public String name;
     public boolean collision = false;

@@ -1,5 +1,6 @@
 package tile;  //  #4
 
+import main.Drawable;
 import main.GamePanel;
 
 import javax.imageio.ImageIO;
@@ -9,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class TileManager {
+public class TileManager implements Drawable {
     GamePanel gp;
     public Tile[] tile;  // #6 made public for Collision Checker
     public int[][] mapTileNum;  // #6 made public for Collision Checker
@@ -49,7 +50,7 @@ public class TileManager {
             while(col < gp.maxScreenCol && row < gp.maxScreenRow){
                 String line = br.readLine();
                 while(col < gp.maxScreenCol){
-                    String numbers[] = line.split(" ");  // remove whitespace
+                    String[] numbers = line.split(" ");  // remove whitespace
                     int num = Integer.parseInt(numbers[col]);  // change String -> int
 
                     mapTileNum[col][row] = num;
@@ -65,6 +66,7 @@ public class TileManager {
         }catch(Exception e){
         }
     }
+    @Override
     public void draw(Graphics2D g2){
         int col = 0;
         int row = 0;

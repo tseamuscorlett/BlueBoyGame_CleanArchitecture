@@ -49,6 +49,7 @@ public class Player extends Entity{
     }
 
     // I don't stop the sprite when it's not moving - a "tinkering" effect for light #3
+    // this is Controller?
     public void update(){  // this gets called 60 times / sec
         if(keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
             if (keyH.upPressed) {
@@ -80,7 +81,6 @@ public class Player extends Entity{
                 }
             }
         }
-
 
         // add oscillating animation #3
         spriteCounter ++;
@@ -122,6 +122,7 @@ public class Player extends Entity{
 
     }
 
+    // need interface for "dependency inversion" => Presenter draws
     public void draw(Graphics2D g2){
         BufferedImage image = null;
         switch (direction) {
@@ -159,6 +160,7 @@ public class Player extends Entity{
             }
         }
         g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
-        // g2.fillRect(x + solidArea.x, y + solidArea.y, solidArea.width, solidArea.height); show collision rectangle
+        // g2.fillRect(x + solidArea.x, y + solidArea.y, solidArea.width, solidArea.height)
+        // to show collision rectangle
     }
 }

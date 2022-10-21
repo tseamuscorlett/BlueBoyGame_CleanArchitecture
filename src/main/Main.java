@@ -4,6 +4,8 @@ import javax.swing.*;
 
 public class Main {
 
+    // "View" in clean architecture
+    // set up the screen for the User
     public static JFrame window;
     public static void main(String[] args) {
         window = new JFrame();
