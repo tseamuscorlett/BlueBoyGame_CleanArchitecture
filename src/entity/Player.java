@@ -6,7 +6,6 @@ import main.KeyHandler;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 // #3
@@ -32,7 +31,7 @@ public class Player extends Entity{
         speed = 4;
         direction = "down";
 
-        maxLife = 1000;
+        maxLife = 500;
         life = maxLife;
     }
 
@@ -97,7 +96,7 @@ public class Player extends Entity{
                 }
             }
             if(life <= 0) {
-                gp.messagePresenter.staminaOut = true;  // out of stamina
+                gp.ui1.staminaOut = true;  // out of stamina
             }
         }
 
@@ -127,7 +126,7 @@ public class Player extends Entity{
                     if(hasKey > 0) {
                         gp.obj[i] = null;
                         hasKey--;
-                        gp.messagePresenter.gameFinished = true;  // ends the game #10
+                        gp.ui1.gameFinished = true;  // ends the game #10
                     }
                     break;
                 case "Potion":
