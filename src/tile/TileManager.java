@@ -20,7 +20,7 @@ public class TileManager implements Drawable {
         tile = new Tile[10];
         mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
         getTileImage();
-        loadMap("maps/map00.txt");
+        loadMap("maps/map01.txt");
     }
 
     public void getTileImage(){

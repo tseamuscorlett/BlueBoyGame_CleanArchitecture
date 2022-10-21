@@ -25,12 +25,15 @@ public class Player extends Entity{
         solidAreaDefaultY = solidArea.y;  // #7
     }
 
-    // set starting position of Player on the map
+    // set starting position & stamina of Player on the map
     public void setDefaultValues(){
         x = gp.tileSize;
         y = gp.tileSize;
         speed = 4;
         direction = "down";
+
+        maxLife = 1000;
+        life = maxLife;
     }
 
     public void getPlayerImage() {
@@ -72,13 +75,29 @@ public class Player extends Entity{
 
 
             // player can move if collisionON = false:
+            // added life
             if(!collisionOn){
                 switch (direction) {
-                    case "up" -> y -= speed;
-                    case "down" -> y += speed;
-                    case "left" -> x -= speed;
-                    case "right" -> x += speed;
+                    case "up" -> {
+                        y -= speed;
+                        life -= 1;
+                    }
+                    case "down" -> {
+                        y += speed;
+                        life -= 1;
+                    }
+                    case "left" -> {
+                        x -= speed;
+                        life -= 1;
+                    }
+                    case "right" -> {
+                        x += speed;
+                        life -= 1;
+                    }
                 }
+            }
+            if(life <= 0) {
+                gp.messagePresenter.staminaOut = true;  // out of stamina
             }
         }
 

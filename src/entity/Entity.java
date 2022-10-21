@@ -18,4 +18,8 @@ public class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;  // #8
     public boolean collisionOn = false;  // #6
 
+    // stamina  #18
+    public int maxLife;
+    public int life;
+
 }

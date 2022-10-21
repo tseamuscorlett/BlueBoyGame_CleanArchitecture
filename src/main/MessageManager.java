@@ -15,6 +15,8 @@ import object.ObjPhotons;
     private double playTime;
     private final DecimalFormat decimalFormat = new DecimalFormat("#0.00");
 
+    public boolean staminaOut = false;
+
     public MessageManager(GamePanel gp) {
         this.gp = gp;
         arial_40 = new Font("Arial", Font.PLAIN, 40);
@@ -26,7 +28,20 @@ import object.ObjPhotons;
 
     @Override
     public void draw(Graphics2D g2) {
-        if (gameFinished) {
+        if (staminaOut) {
+            g2.setFont(arial_80B);
+            g2.setColor(Color.white);
+
+            String text = "Out of Photons!";
+            int textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+            int x = gp.screenWidth / 2 - textLength / 2;
+            int y = gp.screenHeight / 2 - (gp.tileSize * 3);
+            g2.drawString(text, x, y);
+
+            gp.gameThread = null;
+        }
+
+        else if (gameFinished) {
             // end screen
             g2.setFont(arial_80B);
             g2.setColor(Color.white);
@@ -57,7 +72,7 @@ import object.ObjPhotons;
             g2.setFont(arial_40);
             g2.setColor(Color.white);
             g2.drawImage(photonsImage, 16, 0, gp.tileSize, gp.tileSize, null);
-            g2.drawString("= 100", 72, 40);
+            g2.drawString("=" + gp.player.life, 72, 40);
 
             // TIME
             playTime +=(double)1/60;

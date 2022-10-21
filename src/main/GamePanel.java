@@ -31,7 +31,7 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;  // for looping #2
 
     // ENTITY & OBJECT
-    private final Player player = new Player(this, keyH);
+    public final Player player = new Player(this, keyH);
     public SuperObject[] obj = new SuperObject[10];  // #7
 
     // Constructor with java.awt methods to set up screen
