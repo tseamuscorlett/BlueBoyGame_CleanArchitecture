@@ -11,10 +11,9 @@ import object.ObjPhotons;
     private final GamePanel gp;
     private final Font arial_40, arial_80B;
     private final BufferedImage photonsImage;
-    public boolean gameFinished = false;  // encapsulate!!
-    private double playTime;
+    public boolean stageClear = false;  // encapsulate!!
+    public double playTime;
     private final DecimalFormat decimalFormat = new DecimalFormat("#0.00");
-
     public boolean staminaOut = false;
 
     public UI(GamePanel gp) {
@@ -37,39 +36,11 @@ import object.ObjPhotons;
 
         if (gp.gameState == gp.playState) {
             if (staminaOut) {
-                g2.setFont(arial_80B);
-                g2.setColor(Color.white);
-
-                String text = "Out of Photons!";
-                int textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-                int x = gp.screenWidth / 2 - textLength / 2;
-                int y = gp.screenHeight / 2 - (gp.tileSize * 3);
-                g2.drawString(text, x, y);
-
+                drawStaminaOutScreen(g2);
                 gp.gameThread = null;
 
-            } else if (gameFinished) {
-                // end screen
-                g2.setFont(arial_80B);
-                g2.setColor(Color.white);
-
-                // separate declaration to have multiple text messages
-                String text;
-                int x;
-                int y;
-
-                // end message 1
-                text = "Stage Clear!";
-                x = getXForCenteredText(g2, text);
-                y = gp.screenHeight / 2 - (gp.tileSize * 3);
-                g2.drawString(text, x, y);
-
-                // end message 2
-                text = "Your time: " + decimalFormat.format(playTime);
-                x = getXForCenteredText(g2, text);
-                y = gp.screenHeight / 2 - (gp.tileSize);
-                g2.drawString(text, x, y);
-
+            } else if (stageClear) {
+                drawStageClearScreen(g2);
                 gp.gameThread = null;
 
             } else {
@@ -86,6 +57,57 @@ import object.ObjPhotons;
         }
 
     }
+
+        private void drawStageClearScreen(Graphics2D g2) {
+            // end screen
+            g2.setFont(arial_80B);
+            g2.setColor(Color.white);
+
+            // separate declaration to have multiple text messages
+            String text;
+            int x;
+            int y;
+
+            // end message 1
+            text = "Stage Clear!";
+            x = getXForCenteredText(g2, text);
+            y = gp.screenHeight / 2 - (gp.tileSize * 3);
+            g2.drawString(text, x, y);
+
+            // end message 2
+            text = "Your time: " + decimalFormat.format(playTime);
+            x = getXForCenteredText(g2, text);
+            y = gp.screenHeight / 2 - (gp.tileSize);
+            g2.drawString(text, x, y);
+
+            // end message 3
+            g2.setFont(arial_40);
+            text = "Press Enter to Replay";
+            x = getXForCenteredText(g2, text);
+            y = gp.tileSize * 7;
+            g2.drawString(text, x, y);
+        }
+
+        private void drawStaminaOutScreen(Graphics2D g2) {
+            g2.setFont(arial_80B);
+            g2.setColor(Color.white);
+            String text;
+            int x;
+            int y;
+
+            // top message
+            text = "Out of Photons!";
+            x = getXForCenteredText(g2, text);
+            y = gp.screenHeight / 2 - (gp.tileSize * 3);
+            g2.drawString(text, x, y);
+
+            // bottom message
+            g2.setFont(arial_40);
+            text = "Press Enter to Replay";
+            x = getXForCenteredText(g2, text);
+            y = gp.screenHeight / 2 - (gp.tileSize);
+            g2.drawString(text, x, y);
+        }
 
 
         // some helpers for different GAME STATES #13

@@ -21,5 +21,6 @@ public class Entity {
     // stamina  #18
     public int maxLife;
     public int life;
+    int hasKey = 0;  // #8 object pickup
 
 }

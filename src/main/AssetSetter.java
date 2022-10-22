@@ -2,6 +2,7 @@ package main;
 
 import object.ObjDoor;
 import object.ObjKey;
+import object.ObjPhotons;
 import object.ObjPotion;
 
 public class AssetSetter {
@@ -22,5 +23,9 @@ public class AssetSetter {
         gp.obj[2] = new ObjPotion();
         gp.obj[2].x = 14 * gp.tileSize;
         gp.obj[2].y = 7 * gp.tileSize;
+
+        gp.obj[3] = new ObjPhotons();
+        gp.obj[3].x = 4 * gp.tileSize;
+        gp.obj[3].y = 8 * gp.tileSize;
     }
 }

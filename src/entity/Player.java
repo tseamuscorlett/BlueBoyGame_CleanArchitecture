@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Player extends Entity{
     GamePanel gp;
     KeyHandler keyH;
-    int hasKey = 0;  // #8 object pickup
+
 
     public Player (GamePanel gp, KeyHandler keyH){
         this.gp = gp;
@@ -24,7 +24,7 @@ public class Player extends Entity{
         solidAreaDefaultY = solidArea.y;  // #7
     }
 
-    // set starting position & stamina of Player on the map
+    // set default values of Player
     public void setDefaultValues(){
         x = gp.tileSize;
         y = gp.tileSize;
@@ -33,6 +33,8 @@ public class Player extends Entity{
 
         maxLife = 500;
         life = maxLife;
+
+        hasKey = 0;
     }
 
     public void getPlayerImage() {
@@ -72,9 +74,8 @@ public class Player extends Entity{
             int objIndex = gp.collisionChecker.checkObject(this, true);
             pickUpObject(objIndex);
 
-
             // player can move if collisionON = false:
-            // added life
+            // add stamina
             if(!collisionOn){
                 switch (direction) {
                     case "up" -> {
@@ -126,7 +127,7 @@ public class Player extends Entity{
                     if(hasKey > 0) {
                         gp.obj[i] = null;
                         hasKey--;
-                        gp.ui1.gameFinished = true;  // ends the game #10
+                        gp.ui1.stageClear = true;  // ends the game #10
                     }
                     break;
                 case "Potion":
@@ -134,10 +135,13 @@ public class Player extends Entity{
                     speed += 10;
                     gp.obj[i] = null;
                     break;
+                case "Photons":
+                    gp.playSE(1);
+                    life += 100;
+                    gp.obj[i] = null;
+                    break;
             }
-
         }
-
     }
 
     // need interface for "dependency inversion" => Presenter draws

@@ -34,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final Player player = new Player(this, keyH);
     public SuperObject[] obj = new SuperObject[10];  // #7
 
-    // GAME STATE  #13
+    // GAME STATES  #13, 17
     public int gameState;
     public final int titleState = 0;
     public final int playState = 1;

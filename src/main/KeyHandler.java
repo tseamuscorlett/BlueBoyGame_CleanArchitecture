@@ -53,7 +53,40 @@ public class KeyHandler implements KeyListener {
                 gp.gameState = gp.playState;
             }
         }
-    }
+
+//        if (gp.ui1.stageClear) {
+//            if (code == KeyEvent.VK_ENTER) {
+//                gp.setupGame();
+//                gp.startGameThread();
+//            }
+//        }
+
+        if (gp.ui1.staminaOut) {                // # 37 (Seamus' original implementation)
+            if (code == KeyEvent.VK_ENTER) {
+                gp.gameState = gp.titleState;
+                gp.ui1.staminaOut = false;
+                gp.player.setDefaultValues();
+                gp.stopMusic();
+                gp.ui1.playTime = 0;
+
+                gp.setupGame();
+                gp.startGameThread();
+            }
+        }
+
+        if (gp.ui1.stageClear) {                // # 37
+            if (code == KeyEvent.VK_ENTER) {
+                gp.gameState = gp.titleState;
+                gp.ui1.stageClear = false;
+                gp.player.setDefaultValues();
+                gp.stopMusic();
+                gp.ui1.playTime = 0;
+
+                gp.setupGame();
+                gp.startGameThread();
+            }
+        }
+        }
 
 
     @Override
