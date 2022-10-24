@@ -1,31 +1,36 @@
 // #10, called "UI" in original playlist
-package main;
+package UI;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 
-import object.ObjPhotons;
+import entities.GamePanel;
+import entities.Player;
+import entities.object.ObjPhotons;
+import controller_presenter.GameController;
 
-    public class UI implements Drawable {
-    private final GamePanel gp;
+public class MessageUI {
+    private final GameController gp;
+    private final GamePanel gamePanel;
+    private final Player player;
     private final Font arial_40, arial_80B;
     private final BufferedImage photonsImage;
-    public boolean stageClear = false;  // encapsulate!!
     public double playTime;
     private final DecimalFormat decimalFormat = new DecimalFormat("#0.00");
-    public boolean staminaOut = false;
 
-    public UI(GamePanel gp) {
+    public MessageUI(GameController gp, GamePanel gamePanel, Player player) {
         this.gp = gp;
+        this.gamePanel = gamePanel;
+        this.player = player;
         arial_40 = new Font("Arial", Font.PLAIN, 40);
         arial_80B = new Font("Arial", Font.BOLD, 80);
 
         ObjPhotons photons = new ObjPhotons();
-        photonsImage = photons.image;
+        photonsImage = photons.getImage();
     }
 
-    public void draw(Graphics2D g2) {
+    public void drawScreen(Graphics2D g2) {
         if (gp.gameState == gp.titleState) {
             drawTitleScreen(g2);
         }
@@ -35,11 +40,11 @@ import object.ObjPhotons;
         }
 
         if (gp.gameState == gp.playState) {
-            if (staminaOut) {
+            if (gp.playerManager.staminaOut) {
                 drawStaminaOutScreen(g2);
                 gp.gameThread = null;
 
-            } else if (stageClear) {
+            } else if (gp.playerManager.stageClear) {
                 drawStageClearScreen(g2);
                 gp.gameThread = null;
 
@@ -47,15 +52,14 @@ import object.ObjPhotons;
                 // play screen message
                 g2.setFont(arial_40);
                 g2.setColor(Color.white);
-                g2.drawImage(photonsImage, 16, 0, gp.tileSize, gp.tileSize, null);
-                g2.drawString("= " + gp.player.life, 72, 40);
+                g2.drawImage(photonsImage, 16, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+                g2.drawString("= " + player.getLife(), 72, 40);
 
                 // TIME
                 playTime += (double) 1 / 60;
-                g2.drawString("Time: " + decimalFormat.format(playTime), gp.tileSize * 11, 40);
+                g2.drawString("Time: " + decimalFormat.format(playTime), gamePanel.tileSize * 11, 40);
             }
         }
-
     }
 
         private void drawStageClearScreen(Graphics2D g2) {
@@ -71,20 +75,20 @@ import object.ObjPhotons;
             // end message 1
             text = "Stage Clear!";
             x = getXForCenteredText(g2, text);
-            y = gp.screenHeight / 2 - (gp.tileSize * 3);
+            y = gamePanel.screenHeight / 2 - (gamePanel.tileSize * 3);
             g2.drawString(text, x, y);
 
             // end message 2
             text = "Your time: " + decimalFormat.format(playTime);
             x = getXForCenteredText(g2, text);
-            y = gp.screenHeight / 2 - (gp.tileSize);
+            y = gamePanel.screenHeight / 2 - (gamePanel.tileSize);
             g2.drawString(text, x, y);
 
             // end message 3
             g2.setFont(arial_40);
             text = "Press Enter to Replay";
             x = getXForCenteredText(g2, text);
-            y = gp.tileSize * 7;
+            y = gamePanel.tileSize * 7;
             g2.drawString(text, x, y);
         }
 
@@ -98,14 +102,14 @@ import object.ObjPhotons;
             // top message
             text = "Out of Photons!";
             x = getXForCenteredText(g2, text);
-            y = gp.screenHeight / 2 - (gp.tileSize * 3);
+            y = gamePanel.screenHeight / 2 - (gamePanel.tileSize * 3);
             g2.drawString(text, x, y);
 
             // bottom message
             g2.setFont(arial_40);
             text = "Press Enter to Replay";
             x = getXForCenteredText(g2, text);
-            y = gp.screenHeight / 2 - (gp.tileSize);
+            y = gamePanel.screenHeight / 2 - (gamePanel.tileSize);
             g2.drawString(text, x, y);
         }
 
@@ -115,15 +119,8 @@ import object.ObjPhotons;
             g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
             String text = "PAUSED";
             int x = getXForCenteredText(g2, text);
-            int y = gp.screenHeight/2;
+            int y = gamePanel.screenHeight/2;
             g2.drawString(text, x, y);
-        }
-
-        private int getXForCenteredText(Graphics2D g2, String text) {
-            int x;
-            int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-            x = gp.screenWidth/2 - length/2;
-            return x;
         }
 
         // Title Screen #17
@@ -136,7 +133,7 @@ import object.ObjPhotons;
             g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80F));
             text = "Blue Boy Adventure";
             x = getXForCenteredText(g2, text);
-            y = gp.tileSize*3;
+            y = gamePanel.tileSize*3;
             // shadow
             g2.setColor(Color.gray);
             g2.drawString(text, x+5, y+5);
@@ -148,12 +145,19 @@ import object.ObjPhotons;
             g2.setFont(g2.getFont().deriveFont(Font.PLAIN,40F));
             text = "PRESS ENTER TO PLAY";
             x = getXForCenteredText(g2, text);
-            y = gp.tileSize*5;
+            y = gamePanel.tileSize*5;
             g2.drawString(text, x, y);
 
             // blue boy image
-            x = gp.screenWidth/2 - (gp.tileSize*2)/2;
-            y += gp.tileSize*2;
-            g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
+            x = gamePanel.screenWidth/2 - (gamePanel.tileSize*2)/2;
+            y += gamePanel.tileSize*2;
+            g2.drawImage(player.getDown1(), x, y, gamePanel.tileSize*2, gamePanel.tileSize*2, null);
         }
+
+    private int getXForCenteredText(Graphics2D g2, String text) {
+        int x;
+        int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        x = gamePanel.screenWidth/2 - length/2;
+        return x;
     }
+}

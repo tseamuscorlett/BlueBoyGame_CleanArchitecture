@@ -1,14 +1,14 @@
 // #7
-package object;
+package entities.object;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
 public class ObjDoor extends SuperObject {
     public ObjDoor() {
-        name = "Door";
+        setName("Door");
         try {
-            image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("objects/door.png"));
+            setImage(ImageIO.read(getClass().getClassLoader().getResourceAsStream("objects/door.png")));
         } catch(IOException e) {
             e.printStackTrace();
         }

@@ -1,15 +1,15 @@
 // handles keyboard input #2
-package main;
+package controller_presenter;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 
 public class KeyHandler implements KeyListener {
-    // #13 link with gp
-    GamePanel gp;
-    public KeyHandler(GamePanel gp) {
-        this.gp = gp;
+    // #13 link with Game Controller
+    GameController gc;
+    public KeyHandler(GameController gc) {
+        this.gc = gc;
     }
 
     public boolean upPressed, downPressed, leftPressed, rightPressed;
@@ -22,14 +22,14 @@ public class KeyHandler implements KeyListener {
         int code = e.getKeyCode();
 
         // titleState
-        if (gp.gameState == gp.titleState) {
+        if (gc.gameState == gc.titleState) {
             if(code == KeyEvent.VK_ENTER) {
-                gp.gameState = gp.playState;
+                gc.gameState = gc.playState;
             }
         }
 
         // playState
-        if (gp.gameState == gp.playState) {
+        if (gc.gameState == gc.playState) {
             if (code == KeyEvent.VK_W) {
                 upPressed = true;
             }
@@ -43,51 +43,43 @@ public class KeyHandler implements KeyListener {
                 rightPressed = true;
             }
             if (code == KeyEvent.VK_SPACE) {   // #13
-                gp.gameState = gp.pauseState;
+                gc.gameState = gc.pauseState;
                 }
             }
 
         // pauseState
-        else if (gp.gameState == gp.pauseState) {
+        else if (gc.gameState == gc.pauseState) {
             if (code == KeyEvent.VK_SPACE) {   // #13
-                gp.gameState = gp.playState;
+                gc.gameState = gc.playState;
             }
         }
 
-//        if (gp.ui1.stageClear) {
-//            if (code == KeyEvent.VK_ENTER) {
-//                gp.setupGame();
-//                gp.startGameThread();
-//            }
-//        }
-
-        if (gp.ui1.staminaOut) {                // # 37 (Seamus' original implementation)
+        if (gc.playerManager.staminaOut) {                // # 37 (Seamus' original implementation)
             if (code == KeyEvent.VK_ENTER) {
-                gp.gameState = gp.titleState;
-                gp.ui1.staminaOut = false;
-                gp.player.setDefaultValues();
-                gp.stopMusic();
-                gp.ui1.playTime = 0;
+                gc.gameState = gc.titleState;
+                gc.playerManager.staminaOut = false;
+                gc.playerManager.setDefaultValues();
+                gc.music.stop();
+                gc.mUI.playTime = 0;
 
-                gp.setupGame();
-                gp.startGameThread();
+                gc.setupGame();
+                gc.startGameThread();
             }
         }
 
-        if (gp.ui1.stageClear) {                // # 37
+        if (gc.playerManager.stageClear) {                // # 37 (Seamus' original implementation)
             if (code == KeyEvent.VK_ENTER) {
-                gp.gameState = gp.titleState;
-                gp.ui1.stageClear = false;
-                gp.player.setDefaultValues();
-                gp.stopMusic();
-                gp.ui1.playTime = 0;
+                gc.gameState = gc.titleState;
+                gc.playerManager.stageClear = false;
+                gc.playerManager.setDefaultValues();
+                gc.music.stop();
+                gc.mUI.playTime = 0;
 
-                gp.setupGame();
-                gp.startGameThread();
+                gc.setupGame();
+                gc.startGameThread();
             }
         }
         }
-
 
     @Override
     public void keyReleased(KeyEvent e) {

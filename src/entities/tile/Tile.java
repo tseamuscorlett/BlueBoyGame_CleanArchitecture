@@ -1,4 +1,4 @@
-package tile;  //  #4
+package entities.tile;  //  #4
 
 import java.awt.image.BufferedImage;
 

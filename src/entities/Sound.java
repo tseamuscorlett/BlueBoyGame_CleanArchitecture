@@ -1,16 +1,16 @@
 // #9
-package main;
+package entities;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.net.URL;
 
-public class SoundManager {
+public class Sound {
     private Clip clip;
     private final URL[] soundURL = new URL[30];
 
-    public SoundManager() {
+    public Sound() {
         soundURL[0] = getClass().getResource("/music/Screen_Saver.wav");
         soundURL[1] = getClass().getResource("/music/pickup_1.wav");
     }
@@ -34,6 +34,17 @@ public class SoundManager {
 
     public void stop() {
         clip.stop();
+    }
+
+    public void playMusic(int i) {
+        setFile(i);
+        play();
+        loop();
+    }
+
+    public void playSE(int i) {
+        setFile(i);
+        play();
     }
 
 }

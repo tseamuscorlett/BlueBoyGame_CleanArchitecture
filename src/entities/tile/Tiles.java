@@ -1,7 +1,7 @@
-package tile;  //  #4
+package entities.tile;  //  #4
 
-import main.Drawable;
-import main.GamePanel;
+import entities.Entity;
+import entities.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -10,15 +10,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class TileManager implements Drawable {
-    GamePanel gp;
+public class Tiles extends Entity {
+    GamePanel gamePanel;
     public Tile[] tile;  // #6 made public for Collision Checker
     public int[][] mapTileNum;  // #6 made public for Collision Checker
 
-    public TileManager (GamePanel gp){
-        this.gp = gp;
+    public Tiles(GamePanel gamePanel){
+        this.gamePanel = gamePanel;
         tile = new Tile[10];
-        mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
+        mapTileNum = new int[gamePanel.maxScreenCol][gamePanel.maxScreenRow];
         getTileImage();
         loadMap("maps/map01.txt");
     }
@@ -47,16 +47,16 @@ public class TileManager implements Drawable {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             int col = 0;
             int row = 0;
-            while(col < gp.maxScreenCol && row < gp.maxScreenRow){
+            while(col < gamePanel.maxScreenCol && row < gamePanel.maxScreenRow){
                 String line = br.readLine();
-                while(col < gp.maxScreenCol){
+                while(col < gamePanel.maxScreenCol){
                     String[] numbers = line.split(" ");  // remove whitespace
                     int num = Integer.parseInt(numbers[col]);  // change String -> int
 
                     mapTileNum[col][row] = num;
                     col++;
                 }
-                if(col == gp.maxScreenCol){
+                if(col == gamePanel.maxScreenCol){
                     col = 0;
                     row++;
                 }
@@ -73,16 +73,16 @@ public class TileManager implements Drawable {
         int x = 0;
         int y = 0;
 
-        while(col < gp.maxScreenCol && row < gp.maxScreenRow){
+        while(col < gamePanel.maxScreenCol && row < gamePanel.maxScreenRow){
             int tileNum = mapTileNum[col][row];  // store map data
-            g2.drawImage(tile[tileNum].image, x, y, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(tile[tileNum].image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
             col++;
-            x += gp.tileSize;
-            if(col == gp.maxScreenCol){
+            x += gamePanel.tileSize;
+            if(col == gamePanel.maxScreenCol){
                 col = 0;
                 x = 0;
                 row++;
-                y += gp.tileSize;
+                y += gamePanel.tileSize;
             }
         }
     }
