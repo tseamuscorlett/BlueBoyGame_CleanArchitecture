@@ -60,7 +60,7 @@ public class Player extends Entity {
             }
         }
         g2.drawImage(image, getX(), getY(), maze.tileSize, maze.tileSize, null);
-         g2.fillRect(getX() + solidArea.x, getY() + solidArea.y, solidArea.width, solidArea.height);
+        // g2.fillRect(getX() + solidArea.x, getY() + solidArea.y, solidArea.width, solidArea.height);
         // to show collision rectangle
     }
 
