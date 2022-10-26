@@ -4,7 +4,7 @@ package controller_presenter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-
+// Controller
 public class KeyHandler implements KeyListener {
     // #13 link with Game Controller
     GameController gc;
@@ -59,7 +59,7 @@ public class KeyHandler implements KeyListener {
                 gc.gameState = gc.titleState;
                 gc.playerManager.staminaOut = false;
                 gc.playerManager.setDefaultValues();
-                gc.music.stop();
+                // gc.music.stop();
                 gc.mUI.playTime = 0;
 
                 gc.setupGame();
@@ -72,7 +72,7 @@ public class KeyHandler implements KeyListener {
                 gc.gameState = gc.titleState;
                 gc.playerManager.stageClear = false;
                 gc.playerManager.setDefaultValues();
-                gc.music.stop();
+                // gc.music.stop();
                 gc.mUI.playTime = 0;
 
                 gc.setupGame();

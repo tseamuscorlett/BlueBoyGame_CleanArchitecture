@@ -1,12 +1,12 @@
 package UseCases;
 
 import entities.Entity;
-import entities.GamePanel;
+import entities.Maze;
 
 public class CollisionChecker {
-    GamePanel gamePanel;
-    public CollisionChecker(GamePanel gamePanel){
-        this.gamePanel = gamePanel;
+    Maze maze;
+    public CollisionChecker(Maze maze){
+        this.maze = maze;
     }
 
     // #6
@@ -19,43 +19,43 @@ public class CollisionChecker {
         int entityBottomY = entity.getY() + entity.solidArea.y + entity.solidArea.height;
 
         // define col & row numbers
-        int entityLeftCol = entityLeftX/gamePanel.tileSize;
-        int entityRightCol = entityRightX/gamePanel.tileSize;
-        int entityTopRow = entityTopY/gamePanel.tileSize;
-        int entityBottomRow = entityBottomY/gamePanel.tileSize;
+        int entityLeftCol = entityLeftX/ maze.tileSize;
+        int entityRightCol = entityRightX/ maze.tileSize;
+        int entityTopRow = entityTopY/ maze.tileSize;
+        int entityBottomRow = entityBottomY/ maze.tileSize;
 
         int tileNum1, tileNum2;  // only need to check 2 tiles
 
         switch(entity.getDirection()){
             case "up":
-                entityTopRow = (entityTopY - entity.getSpeed())/gamePanel.tileSize;
-                tileNum1 = gamePanel.tiles.mapTileNum[entityLeftCol][entityTopRow];
-                tileNum2 = gamePanel.tiles.mapTileNum[entityRightCol][entityTopRow];
-                if(gamePanel.tiles.tile[tileNum1].collision || gamePanel.tiles.tile[tileNum2].collision){
+                entityTopRow = (entityTopY - entity.getSpeed())/ maze.tileSize;
+                tileNum1 = maze.tiles.mapTileNum[entityLeftCol][entityTopRow];
+                tileNum2 = maze.tiles.mapTileNum[entityRightCol][entityTopRow];
+                if(maze.tiles.tile[tileNum1].collision || maze.tiles.tile[tileNum2].collision){
                     entity.setCollisionOn(true);
                 }
                 break;
             case "down":
-                entityBottomRow = (entityBottomY + entity.getSpeed())/gamePanel.tileSize;
-                tileNum1 = gamePanel.tiles.mapTileNum[entityLeftCol][entityBottomRow];
-                tileNum2 = gamePanel.tiles.mapTileNum[entityRightCol][entityBottomRow];
-                if(gamePanel.tiles.tile[tileNum1].collision || gamePanel.tiles.tile[tileNum2].collision){
+                entityBottomRow = (entityBottomY + entity.getSpeed())/ maze.tileSize;
+                tileNum1 = maze.tiles.mapTileNum[entityLeftCol][entityBottomRow];
+                tileNum2 = maze.tiles.mapTileNum[entityRightCol][entityBottomRow];
+                if(maze.tiles.tile[tileNum1].collision || maze.tiles.tile[tileNum2].collision){
                     entity.setCollisionOn(true);
                 }
                 break;
             case "left":
-                entityLeftCol = (entityLeftX - entity.getSpeed())/gamePanel.tileSize;
-                tileNum1 = gamePanel.tiles.mapTileNum[entityLeftCol][entityTopRow];
-                tileNum2 = gamePanel.tiles.mapTileNum[entityLeftCol][entityBottomRow];
-                if(gamePanel.tiles.tile[tileNum1].collision || gamePanel.tiles.tile[tileNum2].collision){
+                entityLeftCol = (entityLeftX - entity.getSpeed())/ maze.tileSize;
+                tileNum1 = maze.tiles.mapTileNum[entityLeftCol][entityTopRow];
+                tileNum2 = maze.tiles.mapTileNum[entityLeftCol][entityBottomRow];
+                if(maze.tiles.tile[tileNum1].collision || maze.tiles.tile[tileNum2].collision){
                     entity.setCollisionOn(true);
                 }
                 break;
             case "right":
-                entityRightCol = (entityRightX + entity.getSpeed())/gamePanel.tileSize;
-                tileNum1 = gamePanel.tiles.mapTileNum[entityRightCol][entityTopRow];
-                tileNum2 = gamePanel.tiles.mapTileNum[entityRightCol][entityBottomRow];
-                if(gamePanel.tiles.tile[tileNum1].collision || gamePanel.tiles.tile[tileNum2].collision) {
+                entityRightCol = (entityRightX + entity.getSpeed())/ maze.tileSize;
+                tileNum1 = maze.tiles.mapTileNum[entityRightCol][entityTopRow];
+                tileNum2 = maze.tiles.mapTileNum[entityRightCol][entityBottomRow];
+                if(maze.tiles.tile[tileNum1].collision || maze.tiles.tile[tileNum2].collision) {
                     entity.setCollisionOn(true);
                 }
                 break;
@@ -64,19 +64,20 @@ public class CollisionChecker {
     // #8
     public int checkObject(Entity entity, boolean player){
         int index = 999;
-        for(int i = 0; i < gamePanel.obj.length; i++){
-            if(gamePanel.obj[i] != null) {
-                // entity's solid area position
+        for(int i = 0; i < maze.obj.length; i++){
+            if(maze.obj[i] != null) {
+                // entity's solid area position x & y
+                entity.solidArea.x = entity.getX() + entity.solidArea.x;
                 entity.solidArea.y = entity.getY() + entity.solidArea.y;
-                // object's solid area position
-                gamePanel.obj[i].solidArea.x = gamePanel.obj[i].getX() + gamePanel.obj[i].solidArea.x;
-                gamePanel.obj[i].solidArea.y = gamePanel.obj[i].getY() + gamePanel.obj[i].solidArea.y;
+                // object's solid area position x & y
+                maze.obj[i].solidArea.x = maze.obj[i].getX() + maze.obj[i].solidArea.x;
+                maze.obj[i].solidArea.y = maze.obj[i].getY() + maze.obj[i].solidArea.y;
 
                 switch(entity.getDirection()) {
                     case "up":
                         entity.solidArea.y -= entity.getSpeed();
-                        if(entity.solidArea.intersects(gamePanel.obj[i].solidArea)) {
-                            if(gamePanel.obj[i].collision) {
+                        if(entity.solidArea.intersects(maze.obj[i].solidArea)) {
+                            if(maze.obj[i].collision) {
                                 entity.setCollisionOn(true);
                             }
                             if(player) {
@@ -86,8 +87,8 @@ public class CollisionChecker {
                         break;
                     case "down":
                         entity.solidArea.y += entity.getSpeed();
-                        if(entity.solidArea.intersects(gamePanel.obj[i].solidArea)) {
-                            if(gamePanel.obj[i].collision) {
+                        if(entity.solidArea.intersects(maze.obj[i].solidArea)) {
+                            if(maze.obj[i].collision) {
                                 entity.setCollisionOn(true);
                             }
                             if(player) {
@@ -97,8 +98,8 @@ public class CollisionChecker {
                         break;
                     case "left":
                         entity.solidArea.x -= entity.getSpeed();
-                        if(entity.solidArea.intersects(gamePanel.obj[i].solidArea)) {
-                            if(gamePanel.obj[i].collision) {
+                        if(entity.solidArea.intersects(maze.obj[i].solidArea)) {
+                            if(maze.obj[i].collision) {
                                 entity.setCollisionOn(true);
                             }
                             if(player) {
@@ -108,8 +109,8 @@ public class CollisionChecker {
                         break;
                     case "right":
                         entity.solidArea.x += entity.getSpeed();
-                        if(entity.solidArea.intersects(gamePanel.obj[i].solidArea)) {
-                            if(gamePanel.obj[i].collision) {
+                        if(entity.solidArea.intersects(maze.obj[i].solidArea)) {
+                            if(maze.obj[i].collision) {
                                 entity.setCollisionOn(true);
                             }
                             if(player) {
@@ -120,8 +121,8 @@ public class CollisionChecker {
                 }
                 entity.solidArea.x = entity.getsolidAreaDefaultX();
                 entity.solidArea.y = entity.getsolidAreaDefaultY();
-                gamePanel.obj[i].solidArea.x = gamePanel.obj[i].getsolidAreaDefaultX();
-                gamePanel.obj[i].solidArea.y = gamePanel.obj[i].getsolidAreaDefaultY();
+                maze.obj[i].solidArea.x = maze.obj[i].getsolidAreaDefaultX();
+                maze.obj[i].solidArea.y = maze.obj[i].getsolidAreaDefaultY();
             }
         }
         return index;

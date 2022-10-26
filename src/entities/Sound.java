@@ -36,15 +36,5 @@ public class Sound {
         clip.stop();
     }
 
-    public void playMusic(int i) {
-        setFile(i);
-        play();
-        loop();
-    }
-
-    public void playSE(int i) {
-        setFile(i);
-        play();
-    }
 
 }

@@ -1,7 +1,7 @@
 package entities.tile;  //  #4
 
 import entities.Entity;
-import entities.GamePanel;
+import entities.Maze;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -11,11 +11,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class Tiles extends Entity {
-    GamePanel gamePanel;
+    Maze gamePanel;
     public Tile[] tile;  // #6 made public for Collision Checker
     public int[][] mapTileNum;  // #6 made public for Collision Checker
 
-    public Tiles(GamePanel gamePanel){
+    public Tiles(Maze gamePanel){
         this.gamePanel = gamePanel;
         tile = new Tile[10];
         mapTileNum = new int[gamePanel.maxScreenCol][gamePanel.maxScreenRow];

@@ -1,19 +1,15 @@
 import UI.GameScreenUI;
 
 public class Main {
-
-    private static void setupGamePanel() {
-        // 1. Instantiate GamePanelUI
-        GameScreenUI gamePanelUI = new GameScreenUI();
-        // 2. Call its method to create GameScreenUI
-        gamePanelUI.createGameScreenUI();
+    public static void main(String[] args) {
+        setupGameScreen();
     }
 
-    public static void main(String[] args) {
-        setupGamePanel();
+    private static void setupGameScreen() {
+        GameScreenUI gameScreenUI = new GameScreenUI();   // 1. Instantiate GamePanelUI
+        gameScreenUI.createGameScreenUI();                // 2. Call its method to create GameScreenUI
     }
 }
-
 
 
 // this pattern is standard!!

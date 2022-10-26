@@ -1,31 +1,28 @@
 package UseCases;
 
-import UseCases.CollisionChecker;
 import controller_presenter.KeyHandler;
-import entities.GamePanel;
+import entities.Maze;
 import entities.Player;
-import entities.Sound;
 
 import java.awt.*;
 
 
 // #3
 public class PlayerManager {
-    GamePanel gamePanel;
     KeyHandler keyH;
     CollisionChecker collisionChecker;
     Player player;
-    Sound sound;
+    SoundManager soundM;
 
     public boolean stageClear = false;
     public boolean staminaOut = false;
 
 
-    public PlayerManager(CollisionChecker collisionChecker, KeyHandler keyH, GamePanel gamePanel, Player player){
+    public PlayerManager(CollisionChecker collisionChecker, KeyHandler keyH, Player player, SoundManager soundM){
         this.collisionChecker = collisionChecker;
         this.keyH = keyH;
-        this.gamePanel = gamePanel;
         this.player = player;
+        this.soundM = soundM;
 
         setDefaultValues();
 
@@ -36,8 +33,8 @@ public class PlayerManager {
 
     // set default values of Player
     public void setDefaultValues(){
-        player.setX(gamePanel.tileSize);
-        player.setY(gamePanel.tileSize);
+        player.setX(48);
+        player.setY(48);
         player.setSpeed(4);
         player.setDirection("down");
 
@@ -48,7 +45,6 @@ public class PlayerManager {
     }
 
     // I don't stop the sprite when it's not moving - a "tinkering" effect for light #3
-    // this is Controller?
     public void update(){  // this gets called 60 times / sec
         if(keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
             if (keyH.upPressed) {
@@ -111,29 +107,29 @@ public class PlayerManager {
     // pickup object #8
     public void pickUpObject(int i) {
         if(i != 999) {
-            String objectName = gamePanel.obj[i].getName();
+            String objectName = collisionChecker.maze.obj[i].getName();
             switch(objectName) {
                 case "Key":
-                    sound.playSE(1);
+                    soundM.playSE(1);
                     player.setHasKey(player.getHasKey() + 1);
-                    gamePanel.obj[i] = null;
+                    collisionChecker.maze.obj[i] = null;
                     break;
                 case "Door":
                     if(player.getHasKey() > 0) {
-                        gamePanel.obj[i] = null;
+                        collisionChecker.maze.obj[i] = null;
                         player.setHasKey(player.getHasKey() - 1);
                         stageClear = true;  // ends the game #10
                     }
                     break;
                 case "Potion":
-                    sound.playSE(1);
+                    soundM.playSE(1);
                     player.setSpeed(player.getSpeed() + 10);
-                    gamePanel.obj[i] = null;
+                    collisionChecker.maze.obj[i] = null;
                     break;
                 case "Photons":
-                    sound.playSE(1);
+                    soundM.playSE(1);
                     player.setLife(player.getLife() + 100);
-                    gamePanel.obj[i] = null;
+                    collisionChecker.maze.obj[i] = null;
                     break;
             }
         }
