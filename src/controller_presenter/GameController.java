@@ -58,7 +58,7 @@ public class GameController extends JPanel implements Runnable {
     // initialise UseCases => use their methods
     public void setupGame () {
         AssetSetter assetSetter = new AssetSetter(maze);  // for setting objects #7
-        assetSetter.setObject();
+        assetSetter.setAssetsEasy();
 
         soundM.playMusic(0);  // background music #9
 

@@ -26,10 +26,10 @@ public class Tiles extends Entity {
     public void getTileImage(){
         try {
             tile[0] = new Tile();
-            tile[0].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/grass.png"));
+            tile[0].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/black.png"));
 
             tile[1] = new Tile();
-            tile[1].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/wall.png"));
+            tile[1].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/stars.png"));
             tile[1].collision = true;
 
             tile[2] = new Tile();

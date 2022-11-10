@@ -8,7 +8,7 @@ public class ObjDoor extends SuperObject {
     public ObjDoor() {
         setName("Door");
         try {
-            setImage(ImageIO.read(getClass().getClassLoader().getResourceAsStream("objects/door.png")));
+            setImage(ImageIO.read(getClass().getClassLoader().getResourceAsStream("objects/blackhole.png")));
         } catch(IOException e) {
             e.printStackTrace();
         }

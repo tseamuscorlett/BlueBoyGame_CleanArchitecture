@@ -2,7 +2,7 @@ package entities;
 
 import java.awt.*;
 
-public interface Drawable {
+public interface IDrawable {
     void draw(Graphics2D g2);
 }
 

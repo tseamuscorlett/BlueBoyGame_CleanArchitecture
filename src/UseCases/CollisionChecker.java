@@ -5,9 +5,7 @@ import entities.Maze;
 
 public class CollisionChecker {
     Maze maze;
-    public CollisionChecker(Maze maze){
-        this.maze = maze;
-    }
+    public CollisionChecker(Maze maze){this.maze = maze;}
 
     // #6
     public void checkTile(Entity entity){
@@ -63,7 +61,7 @@ public class CollisionChecker {
     }
     // #8
     public int checkObject(Entity entity, boolean player){
-        int index = 999;
+        int index = - 1;
         for(int i = 0; i < maze.obj.length; i++){
             if(maze.obj[i] != null) {
                 // entity's solid area position x & y

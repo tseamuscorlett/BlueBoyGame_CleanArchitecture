@@ -12,7 +12,7 @@ public class AssetSetter {
         this.maze = maze;
     }
 
-    public void setObject() {
+    public void setAssetsEasy() {
         maze.obj[0] = new ObjKey();
         maze.obj[0].setX(5 * maze.tileSize); // 5*48 = 240
         maze.obj[0].setY(5 * maze.tileSize);
@@ -28,5 +28,11 @@ public class AssetSetter {
         maze.obj[3] = new ObjPhotons();
         maze.obj[3].setX(4 * maze.tileSize);
         maze.obj[3].setY(8 * maze.tileSize);
+    }
+
+    public void setAssetsMedium() {
+    }
+
+    public void setAssetsHard() {
     }
 }

@@ -15,8 +15,8 @@ public class SuperObject extends Entity {
     public boolean collision = false;
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);  // #8 let's NOT change this
 
-    public void draw(Graphics2D g2, Maze gp) {
-        g2.drawImage(image, getX(), getY(), gp.tileSize, gp.tileSize, null);
+    public void draw(Graphics2D g2, Maze maze) {
+        g2.drawImage(image, getX(), getY(), maze.tileSize, maze.tileSize, null);
     }
 
     public void setImage(BufferedImage image) {

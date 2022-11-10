@@ -93,20 +93,20 @@ public class PlayerManager {
         }
 
         // add oscillating animation #3
-        player.spriteCounter ++;
-        if (player.spriteCounter > 12){
-            if(player.spriteNum == 1){
-                player.spriteNum = 2;
-            } else if(player.spriteNum == 2){
-                player.spriteNum = 1;
-            }
-            player.spriteCounter = 0;
-        }
+//        player.spriteCounter ++;
+//        if (player.spriteCounter > 12){
+//            if(player.spriteNum == 1){
+//                player.spriteNum = 2;
+//            } else if(player.spriteNum == 2){
+//                player.spriteNum = 1;
+//            }
+//            player.spriteCounter = 0;
+//        }
     }
 
     // pickup object #8
     public void pickUpObject(int i) {
-        if(i != 999) {
+        if(i != -1) {
             String objectName = collisionChecker.maze.obj[i].getName();
             switch(objectName) {
                 case "Key":

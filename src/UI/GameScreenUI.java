@@ -12,7 +12,7 @@ public class GameScreenUI {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-        window.setTitle("BlueBoyAdventure");
+        window.setTitle("207: A Space Odyssey");
         window.add(gc);
         window.pack();
 

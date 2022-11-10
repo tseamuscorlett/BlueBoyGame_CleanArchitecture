@@ -130,8 +130,8 @@ public class MessageUI {
             int y;
 
             // title
-            g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80F));
-            text = "Blue Boy Adventure";
+            g2.setFont(g2.getFont().deriveFont(Font.PLAIN,60F));
+            text = "207: A Space Odyssey";
             x = getXForCenteredText(g2, text);
             y = maze.tileSize*3;
             // shadow
