@@ -7,16 +7,16 @@ import java.io.IOException;
 
 public class Player extends Entity {
 
+    private int life;
+    private int maxLife;
+    private int hasKey;
+
     public Player() {
         try {
-            setUp1(ImageIO.read(getClass().getClassLoader().getResourceAsStream("x/boy_up_1.png")));
-            setUp2(ImageIO.read(getClass().getClassLoader().getResourceAsStream("x/boy_up_2.png")));
-            setDown1(ImageIO.read(getClass().getClassLoader().getResourceAsStream("x/boy_down_1.png")));
-            setDown2(ImageIO.read(getClass().getClassLoader().getResourceAsStream("x/boy_down_2.png")));
-            setLeft1(ImageIO.read(getClass().getClassLoader().getResourceAsStream("x/boy_left_1.png")));
-            setLeft2(ImageIO.read(getClass().getClassLoader().getResourceAsStream("x/boy_left_2.png")));
-            setRight1(ImageIO.read(getClass().getClassLoader().getResourceAsStream("x/boy_right_1.png")));
-            setRight2(ImageIO.read(getClass().getClassLoader().getResourceAsStream("x/boy_right_2.png")));
+            setUp1(ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_up_1.png")));
+            setDown1(ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_down_1.png")));
+            setLeft1(ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_left_1.png")));
+            setRight1(ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_right_1.png")));
         } catch(IOException e) {
             e.printStackTrace();
         }
@@ -27,41 +27,41 @@ public class Player extends Entity {
         BufferedImage image = null;
         switch (getDirection()) {
             case "up" -> {
-                if (spriteNum == 1) {
-                    image = getUp1();
-                }
-                if (spriteNum == 2) {
-                    image = getUp2();
-                }
+                image = getUp1();
             }
             case "down" -> {
-                if (spriteNum == 1) {
-                    image = getDown1();
-                }
-                if (spriteNum == 2) {
-                    image = getDown2();
-                }
+                image = getDown1();
             }
             case "left" -> {
-                if (spriteNum == 1) {
-                    image = getLeft1();
-                }
-                if (spriteNum == 2) {
-                    image = getLeft2();
-                }
+                image = getLeft1();
             }
             case "right" -> {
-                if (spriteNum == 1) {
-                    image = getRight1();
-                }
-                if (spriteNum == 2) {
-                    image = getRight2();
-                }
+                image = getRight1();
             }
         }
         g2.drawImage(image, getX(), getY(), maze.tileSize, maze.tileSize, null);
-         g2.fillRect(getX() + solidArea.x, getY() + solidArea.y, solidArea.width, solidArea.height);
+        // g2.fillRect(getX() + solidArea.x, getY() + solidArea.y, solidArea.width, solidArea.height);
         // to show collision rectangle
     }
 
+    public int getLife(){
+        return this.life;
+    }
+    public void setLife(int life){
+        this.life = life;
+    }
+
+    public int getMaxLife(){
+        return this.maxLife;
+    }
+    public void setMaxLife(int maxLife){
+        this.maxLife = maxLife;
+    }
+
+    public int getHasKey(){
+        return this.hasKey;
+    }
+    public void setHasKey(int key){
+        this.hasKey = key;
+    }
 }
