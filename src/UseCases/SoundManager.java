@@ -16,6 +16,10 @@ public class SoundManager {
         se.setFile(i);
         se.play();
     }
+
+    public void stopMusic() {
+        music.stop();
+    }
 }
 
 
